@@ -57,6 +57,17 @@ router.post('/login',(req,res)=>{
 //login route ended//
 
 
+router.get('/new_user',(req,res=>{
+    const db=new db;
+    db.Email=req.body.Email;
+    db.Password=req.body.Password;
+    db.save().then(user=>{
+        res.status(200).json({response:"added successfully",response:"1"});
+    }).catch(err=>{
+        res.status(400).json({response:"Error",reponse:"0"});
+    })
+}))
+
 module.exports={
     auth_route:router
 }
