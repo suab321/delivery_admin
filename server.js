@@ -13,6 +13,8 @@ require('./databse/db');
 
 //import routes from other folders//
 const {auth_route}=require('./authentication/authenticate');
+const {driver_route}=require('./drivers/driver');
+const {user_route}=require('./users/user');
 //ended///
 
 
@@ -25,6 +27,8 @@ app.use(bodyparser.json());
 
 //using routes imported from other folders//
 app.use('/authentication',auth_route);
+app.use('/driver',driver_route);
+app.use('/user',user_route);
 //ended///
 
 

@@ -56,8 +56,8 @@ router.post('/login',(req,res)=>{
 })
 //login route ended//
 
-
-router.get('/new_user',(req,res=>{
+//for ist time users//
+router.post('/new_user',(req,res)=>{
     const db=new db;
     db.Email=req.body.Email;
     db.Password=req.body.Password;
@@ -66,7 +66,8 @@ router.get('/new_user',(req,res=>{
     }).catch(err=>{
         res.status(400).json({response:"Error",reponse:"0"});
     })
-}))
+})
+//ended///
 
 module.exports={
     auth_route:router
