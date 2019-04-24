@@ -93,6 +93,43 @@ router.get('/get_unverified_users',verify_token,(req,res)=>{
 })
 //route ended///
 
+//route to get all transactions///
+router.get('/transactions',verify_token,(req,res)=>{
+    const user_id=decodeToken(req.token).user;
+    if(user_id){
+        user_model.findById({_id:user_id}).then(user=>{
+            axios.get(`${user_server}/services/get_chargeId`).then(user=>{
+                res.status(200).json(user);
+            }).catch(err=>{
+                res.status(400).json({msg:"Error fetching details",response:"1"});
+            })
+        }).catch(err=>{
+            res.status(400).json(err);
+        })
+    }
+    else
+        res.status(400).json({msg:"You are not a valid user",response:"2"});
+})
+//route ended///
+
+//route to get charge_detial///
+router.get('/charge_detail',verify_token,(req,res)=>{
+    const user_id=decodeToken(req.token).user;
+    if(user_id){
+        user_model.findById({_id:user_id}).then(user=>{
+            axios.post(`${user_server}/services/get_charge_detail`,{Charge_id:req.body.Charge_id}).then(user=>{
+                res.status(200).json(user);
+            }).catch(err=>{
+                console.log(err);
+            })
+        }).catch(err=>{
+            res.status(400).json({msg:"You are not a valid user",response:"1"});
+        })
+    }
+    else
+        res.status(400).json({msg:"You are not authenticated user",response:"2"});
+})
+//route ended//
 module.exports={
     user_route:router
 }
