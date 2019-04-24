@@ -25,7 +25,7 @@ const get_token=(req,res,next)=>{
         res.status(400).json({msg:"Token is required",response:"1"})
 }
 
-//route to get unverified users//
+//route to get unverified users///
 router.get('/get_unverified_user',get_token,(req,res)=>{
     const user_id=decodeToken(req.token).user;
     if(user_id){
