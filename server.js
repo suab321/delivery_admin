@@ -2,6 +2,7 @@
 const express=require('express');
 const app =express();
 const bodyparser=require('body-parser');
+const cors=require('cors');
 //ended///
 
 
@@ -21,9 +22,11 @@ const {user_route}=require('./users/user');
 
 
 //middleware used by routes//
+app.use(cors());
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
 //ended///
+
 
 //using routes imported from other folders//
 app.use('/authentication',auth_route);
