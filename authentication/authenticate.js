@@ -58,7 +58,7 @@ router.post('/login',(req,res)=>{
 
 //for ist time users//
 router.post('/new_user',(req,res)=>{
-    const db=new db;
+    const db=new user_model;
     db.Email=req.body.Email;
     db.Password=req.body.Password;
     db.save().then(user=>{
