@@ -11,8 +11,8 @@ mongoose.connect(mongourl,{useNewUrlParser:true},(err,connection)=>{
 })
 
 const user=new mongoose.Schema({
-    Email:String,
-    Password:String
+    Email:{type:String,unique:true},
+    Password:{type:String}
 })
 
 const user_model=mongoose.model("user",user);

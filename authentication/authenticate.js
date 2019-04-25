@@ -57,16 +57,17 @@ router.post('/login',(req,res)=>{
 //login route ended//
 
 //for ist time users//
-router.post('/new_user',(req,res)=>{
-    const db=new user_model;
-    db.Email=req.body.Email;
-    db.Password=req.body.Password;
-    db.save().then(user=>{
-        res.status(200).json({response:"added successfully",response:"1"});
-    }).catch(err=>{
-        res.status(400).json({response:"Error",reponse:"0"});
-    })
-})
+// router.post('/new_user',(req,res)=>{
+//     const db=new user_model;
+//     db.Email=req.body.Email;
+//     db.Password=req.body.Password;
+//     db.save().then(user=>{
+//         res.status(200).json({response:"added successfully",response:"1"});
+//     }).catch(err=>{
+//         console.log(err);
+//         res.status(400).json({response:"Error",reponse:"0"});
+//     })
+// })
 //ended///
 
 module.exports={
