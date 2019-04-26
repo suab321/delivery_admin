@@ -30,9 +30,10 @@ router.get('/get_unverified_user',get_token,(req,res)=>{
     const user_id=decodeToken(req.token).user;
     if(user_id){
         user_model.findById({_id:user_id}).then(user=>{
-            axios.get(`${driver}/services/get_pending_drivers`).then(res1=>{
+            axios.get(`${driver}/services/get_unverified_user`).then(res1=>{
                 res.status(200).json(res1.data);
             }).catch(err=>{
+                console.log(err);
                 res.status(400).json({msg:"unable to fetch data",response:"1"});
             })
         }).catch(err=>{
@@ -49,7 +50,7 @@ router.get('/get_drivers',get_token,(req,res)=>{
     const user_id=decodeToken(req.token).user;
     if(user_id){
         user_model.findById({_id:user_id}).then(user=>{
-            axios.get(`${driver}/authentication/get_drivers)`).then(res1=>{
+            axios.get(`${driver}/authentication/get_driver`).then(res1=>{
                 res.status(200).json(res1.data);
             }).catch(err=>{
                 res.status(400).json({msg:"Error in from driver side",response:"1"});
@@ -64,22 +65,22 @@ router.get('/get_drivers',get_token,(req,res)=>{
 //route ended///
 
 //route to get unatteneded orders///
-router.get('/get_pending_orders',get_token,(req,res)=>{
-    const user_id=decodeToken(req.token).user;
-    if(user_id){
-        user_model.findById({_id:user_id}).then(user=>{
-            axios.get(`${driver}/services/pending_order)`).then(res1=>{
-                res.status(200).json(res1.data);
-            }).catch(err=>{
-                res.status(400).json({msg:"Error in from driver side",response:"1"});
-            })
-        }).catch(err=>{
-            res.status(400).json({msg:"You are not allowed for this",response:"2"});
-        })
-    }
-    else
-        res.status(400).json({msg:"you are not authorised",response:"2"});
-})
+// router.get('/get_pending_orders',get_token,(req,res)=>{
+//     const user_id=decodeToken(req.token).user;
+//     if(user_id){
+//         user_model.findById({_id:user_id}).then(user=>{
+//             axios.get(`${driver}/services/pending_order)`).then(res1=>{
+//                 res.status(200).json(res1.data);
+//             }).catch(err=>{
+//                 res.status(400).json({msg:"Error in from driver side",response:"1"});
+//             })
+//         }).catch(err=>{
+//             res.status(400).json({msg:"You are not allowed for this",response:"2"});
+//         })
+//     }
+//     else
+//         res.status(400).json({msg:"you are not authorised",response:"2"});
+// })
 //route ended///
 
 //route to get all orders
@@ -87,7 +88,7 @@ router.get('/get_orders',get_token,(req,res)=>{
     const user_id=decodeToken(req.token).user;
     if(user_id){
         user_model.findById({_id:user_id}).then(user=>{
-            axios.get(`${driver}/services/order)`).then(res1=>{
+            axios.get(`${driver}/services/order`).then(res1=>{
                 res.status(200).json(res1.data);
             }).catch(err=>{
                 res.status(400).json({msg:"Error in from driver side",response:"1"});
