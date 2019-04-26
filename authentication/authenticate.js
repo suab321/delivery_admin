@@ -45,7 +45,7 @@ router.post('/add_new_user',get_token,(req,res)=>{
 //login route//
 router.post('/login',(req,res)=>{
     user_model.find({Email:req.body.Email,Password:req.body.Password}).then(user=>{
-        const token=createToken(user._id);
+        const token=createToken(user[0]._id);
         if(token)
             res.status(200).json({token});
         else

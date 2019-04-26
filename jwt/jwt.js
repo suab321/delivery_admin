@@ -11,10 +11,10 @@ function createToken(data){
     }
 }
 
-function decodeToken(data){
+function decodeToken(token){
     try{
-        const user=jwt.verify(data,"suab");
-        return user;
+        const authdata=jwt.verify(token,"suab");
+        return authdata;
     }
     catch(err){
         return 0;
