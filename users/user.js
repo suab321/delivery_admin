@@ -129,7 +129,7 @@ router.post('/charge_detail',verify_token,(req,res)=>{
     const user_id=decodeToken(req.token).user;
     if(user_id){
         user_model.findById({_id:user_id}).then(user=>{
-            axios.post(`${user_server}/services/get_charge_detail`,{Charge_id:req.body.Charge_id}).then(res1=>{
+            axios.post(`${user_server}/payment/get_charge_detail`,{Charge_id:req.body.Charge_id}).then(res1=>{
                 res.status(200).json(res1.data);
             }).catch(err=>{
                 res.status(400).json({msg:"error fetching data",response:"1"});
