@@ -8,7 +8,7 @@ const {user_server}=require('../url')
 
 
 const verify_token=(req,res,next)=>{
-    const token=req.headers['authorozation'];
+    const token=req.headers['authorization'];
     if(token !== undefined){
         req.token=token.split(' ')[1];
         next();
