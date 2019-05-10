@@ -16,6 +16,7 @@ require('./databse/db');
 const {auth_route}=require('./authentication/authenticate');
 const {driver_route}=require('./drivers/driver');
 const {user_route}=require('./users/user');
+const {pay_route}=require('./payment/pay_driver')
 //ended///
 
 
@@ -32,6 +33,7 @@ app.use(bodyparser.json());
 app.use('/authentication',auth_route);
 app.use('/driver',driver_route);
 app.use('/user',user_route);
+app.use('/payment',pay_route);
 //ended///
 
 

@@ -143,6 +143,7 @@ router.post('/charge_detail',verify_token,(req,res)=>{
         res.status(400).json({msg:"You are not authenticated user",response:"2"});
 })
 //route ended//
+
 module.exports={
     user_route:router
 }
