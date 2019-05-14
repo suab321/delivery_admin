@@ -18,14 +18,11 @@ function createToken(data){
 function decodeToken(token){
     try{
         const authdata=jwt.verify(token,"suab");
-        user_model.findById({_id:authdata.user}).then(user=>{
-            if(user)
-                return authdata;
-            else
-                return 0;
-        }).catch(err=>{return 0})
+        console.log(authdata);
+        return authdata;
     }
     catch(err){
+        console.log(err);
         return 0;
     }
 }
