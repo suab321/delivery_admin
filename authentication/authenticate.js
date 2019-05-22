@@ -1,7 +1,7 @@
 const router=require('express').Router();
 
 //importing modules from other folder
-const {user_model}=require('../databse/db');
+const {user_model,control_model}=require('../databse/db');
 const {createToken,decodeToken}=require('../jwt/jwt');
 
 const get_token=(req,res,next)=>{
@@ -69,6 +69,41 @@ router.post('/login',(req,res)=>{
 //     })
 // })
 //ended///
+
+//route for getting the refund fine from control_model
+router.get('/get_controls/:what',(req,res)=>{
+    var control=req.params.what;
+    console.log(control);
+    
+    switch(control){
+        case "1":
+            control_model.find({}).then(user1=>{user=user1
+            res.status(200).json(user[0].Refund_fine);
+            }).catch(err=>res.status(400).json(err))
+            break;
+        default:
+            res.status(200).json("Not a valid choice");
+            break;
+    }
+})
+//route ended
+
+//route for updating the value of controls
+router.post('/update_controls/:what',get_token,(req,res)=>{
+    const user_id=decodeToken(req.token).user;
+    user_model.findById({_id:user_id}).then(user=>{
+        switch(req.params.what){
+            case "1":
+                control_model.findOneAndUpdate({},{Refund_fine:req.body.value}).then(user=>{
+                    res.status(200).json("update successfully");
+                }).catch(err=>{res.status(400).json("Error updating value")});
+                break;
+            default:
+                res.status(400).json("Not a valid choice");
+        }
+    })
+})
+//route ended//
 
 module.exports={
     auth_route:router

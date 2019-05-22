@@ -22,10 +22,16 @@ const payment=new mongoose.Schema({
     From_dbId:String
 })
 
+const controls=new mongoose.Schema({
+    Refund_fine:{type:Number,default:90},
+})
+
 const user_model=mongoose.model("user",user);
 const payment_model=mongoose.model("payment",payment);
+const control_model=mongoose.model("Controls",controls);
 
 module.exports={
     user_model,
-    payment_model
+    payment_model,
+    control_model
 }
