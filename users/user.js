@@ -144,6 +144,19 @@ router.post('/charge_detail',verify_token,(req,res)=>{
 })
 //route ended//
 
+
+//route to cancel a order//
+router.post('/cancel_order',verify_token,(req,res)=>{
+    const user_id=decodeToken(req.token).user;
+    user_model.findById({_id:user_id}).then(user=>{
+        axios.post(`${user_server}/payment/cancel_orer_admin`,{Order_id:req.body.Order_id}).then(res1=>{
+            res.status(200).json({res:"1",msg:"YOur order was cancelled successfully"});
+        }).catch(err=>{
+            res.status(400).json({res:"3",msg:"Unable to cancel order"});
+        })
+    })
+})
+//route ended//
 module.exports={
     user_route:router
 }
