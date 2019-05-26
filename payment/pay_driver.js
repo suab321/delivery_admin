@@ -1,6 +1,14 @@
+
+//key for stripe account//
+const secretKey="sk_test_Wae1JVypvlaoK5pLIFPsrexC0060Ik7P4F";
+const publicKey="pk_test_mNSmGjYqswUKp1NnrGGuNk8f004q3h4DWh";
+//ends//
+
+
 //importing node modules
 const router=require('express').Router();
 const axios=require('axios');
+const stripe=require('stripe')(secretKey)
 //ends//
 
 //importing from developer made folders//
@@ -20,12 +28,21 @@ const get_token=(req,res,next)=>{
 }
 
 router.post('/pay_to_driver',get_token,(req,res)=>{
-    axios.get(`${driver}/services/get_order`,{headers:{authorization: `Bearer ${req.token}`}},{Order_id:req.body.Order_id}).then(res1=>{
+    axios.get(`${driver}/services/get_order_admin`,{Order_id:req.body.Order_id}).then(res1=>{
         const data=res1.data;
         console.log(data);
         if(!data.isPaid){
             console.log("driver is unpaid");
-            res.status(200).json("driver is unpaid");
+            stripe.transfers.create({
+                amount:data.Earning,
+                currency:"usd",
+                destination:"4eC39HqLyjWDarjtT1zdp7dc"
+            }).then(transfer=>{
+                console.log(transfer);
+            }).catch(err=>{
+                console.log(err);
+            })
+            
         }
         else{
             console.log("driver is paid");
