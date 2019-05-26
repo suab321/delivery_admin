@@ -17,7 +17,7 @@ const {driver}=require('../url')
 //ends//
 
 const get_token=(req,res,next)=>{
-    const header=req.headers["authorization"];
+    const header=req.headers["Authorization"];
     if(header === undefined)
         res.status(400).json({code:"2",msg:"Token is required"})
     else{
