@@ -31,7 +31,7 @@ const get_token=(req,res,next)=>{
 }
 
 router.post('/pay_to_driver',get_token,(req,res)=>{
-    axios.post(`${driver}/services/get_order`,{headers:{Authorization: `Bearer ${req.token}`}},{Order_id:req.body.Order_id}).then(res1=>{
+    axios.post(`${driver}/services/get_order`,{Order_id:req.body.Order_id},{headers:{Authorization: `Bearer ${req.token}`}}).then(res1=>{
         const data=res1.data;
         console.log("35js "+data);
         if(!data.isPaid){
