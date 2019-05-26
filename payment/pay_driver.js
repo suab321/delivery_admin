@@ -18,8 +18,10 @@ const {driver}=require('../url')
 
 const get_token=(req,res,next)=>{
     const header=req.headers.Authorization;
-    if(header === undefined)
+    if(header === undefined){
+        console.log("token is failing");
         res.status(400).json({code:"2",msg:"Token is required"})
+    }
     else{
         const token=header.split(' ')[1];
         req.token=token;
@@ -30,7 +32,7 @@ const get_token=(req,res,next)=>{
 router.post('/pay_to_driver',get_token,(req,res)=>{
     axios.post(`${driver}/services/get_order_admin`,{headers:{Authorization: `Bearer ${req.token}`}},{Order_id:req.body.Order_id}).then(res1=>{
         const data=res1.data;
-        console.log(data);
+        console.log("35js "+data);
         if(!data.isPaid){
             console.log("driver is unpaid");
             stripe.transfers.create({
@@ -49,7 +51,7 @@ router.post('/pay_to_driver',get_token,(req,res)=>{
             res.status(400).json("driver is paid");
         }
     }).catch(err=>{
-        console.log(err);
+        console.log("err coming when fetching order id from driver");
         res.status(400).json("error fetching response");
     })
 })
