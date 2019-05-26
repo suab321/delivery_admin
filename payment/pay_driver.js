@@ -18,7 +18,7 @@ const {driver}=require('../url')
 
 const get_token=(req,res,next)=>{
     const header=req.headers["authorization"];
-    if(header !== undefined)
+    if(header === undefined)
         res.status(400).json({code:"2",msg:"Token is required"})
     else{
         const token=header.split(' ')[1];
@@ -28,7 +28,7 @@ const get_token=(req,res,next)=>{
 }
 
 router.post('/pay_to_driver',get_token,(req,res)=>{
-    axios.get(`${driver}/services/get_order_admin`,{Order_id:req.body.Order_id}).then(res1=>{
+    axios.post(`${driver}/services/get_order_admin`,{headers:{Authorization: `Bearer ${req.token}`}},{Order_id:req.body.Order_id}).then(res1=>{
         const data=res1.data;
         console.log(data);
         if(!data.isPaid){
