@@ -39,7 +39,7 @@ router.post('/pay_to_driver',get_token,(req,res)=>{
             stripe.transfers.create({
                 amount:data.Earning,
                 currency:"usd",
-                destination:"4eC39HqLyjWDarjtT1zdp7dc"
+                destination:req.body.Account_Id
             }).then(transfer=>{
                 console.log(transfer);
             }).catch(err=>{
