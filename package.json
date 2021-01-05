@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/suab321/delivery_admin#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "circular-json": "^0.5.9",
     "cors": "^2.8.5",
